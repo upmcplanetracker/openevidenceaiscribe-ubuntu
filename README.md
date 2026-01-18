@@ -35,8 +35,8 @@ Installation
 ------------
 Clone the repository and install dependencies:
 
-    git clone https://github.com/YOURNAME/clinic-audio-router.git
-    cd clinic-audio-router
+    git clone https://github.com/upmcplanetracker/openevidenceaiscribe-ubuntu.git
+    cd openevidenceaiscribe-ubuntu
     chmod +x *.sh
     ./install-deps.sh
     
@@ -44,18 +44,18 @@ Clone the repository and install dependencies:
 
 Configure Audio Devices
 -----------------------
-### 1\. Create your config file
+### 1\. Discover device names
+
+    ./discover-audio.sh
+    
+Use the output to confirm headset, Zoom, and Chrome PipeWire node names. Use these device names in step 2.
+
+### 2\. Create your config file
 
     cp clinic.env.example clinic.env
     nano clinic.env
     
 Edit the values so they match your hardware and applications.
-
-### 2\. Discover device names
-
-    ./discover-audio.sh
-    
-Use the output to confirm headset, Zoom, and Chrome PipeWire node names. Update `clinic.env` if needed.
 * * *
 
 Usage
@@ -64,7 +64,7 @@ Usage
 
     ./connectclinic.sh
     
-**Important:** Start OpenEvidence recording in Chrome and a Zoom meeting window before running this script. The Chrome and Zoom input does not exist until recording begins.  If you close either Zoom or the OpenEvidence recording while the shell connectclinic.sh is running you probably will need to run this script again (i.e., you will need to run the connectclinic.sh script before each patient with Zoom meeting open and the OpenEvidence tab open and recording.  Unforutnaely Ubuntu is aggressive about re-wiring the audio once a device shuts off.
+**Important:** Start OpenEvidence recording in Chrome and a Zoom meeting window before running this script. The Chrome and Zoom input most likely does not exist until recording begins.  If you close either Zoom or the OpenEvidence recording while the shell connectclinic.sh is running, you will probably need to run this script again (i.e., you will need to run the connectclinic.sh script before each patient with Zoom meeting open and the OpenEvidence tab open and recording.  Unforutnaely Ubuntu is aggressive about re-wiring the audio once a device shuts off.)
 
 ### Turn Audio Routing OFF
 
@@ -79,10 +79,10 @@ Edit your `~/.bashrc` file:
 
     nano ~/.bashrc
     
-Add the following lines:
+Add the following lines to the bottom of the file:
 
-    alias clinic-on="$HOME/clinic-audio-router/connectclinic.sh"
-    alias clinic-off="$HOME/clinic-audio-router/disconnectclinic.sh"
+    alias clinic-on="$HOME/openevidenceaiscribe-ubuntu/connectclinic.sh"
+    alias clinic-off="$HOME/openevidenceaiscribe-ubuntu/disconnectclinic.sh"
     
 Reload your shell configuration:
 
