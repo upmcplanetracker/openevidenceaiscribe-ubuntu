@@ -102,7 +102,7 @@ This provides a tray icon for quickly switching audio devices.
     sudo snap install indicator-sound-switcher
     sudo apt install gnome-shell-extension-appindicator
     
-Log out and log back in to enable the tray icon.  When this is working your input should be your microphone and the output should be the AI scribe.  You may need to double check this setting every time you run the connect script.
+Log out and log back in to enable the tray icon.  You will need to manually run the Sound Switcher once to get it started. When this is working your input should be your microphone and the output should be the AI scribe.  You may need to double check this setting every time you run the connect script.
 
 * * *
 Troubleshooting
