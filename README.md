@@ -128,3 +128,5 @@ This project uses low-level PipeWire links. Audio routing may break after:
 *   Major Zoom or Chrome updates
 
 Use at your own risk.
+
+Remember to make sure your version of Zoom is HIPAA compliant/has a BAA. 
