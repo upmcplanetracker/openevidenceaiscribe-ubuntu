@@ -129,4 +129,6 @@ This project uses low-level PipeWire links. Audio routing may break after:
 
 Use at your own risk.
 
+I am not affiliated with Zoom, Chrome/Google, OpenEvidence, or anything else used here.
+
 Remember to make sure your version of Zoom is HIPAA compliant/has a BAA. 
