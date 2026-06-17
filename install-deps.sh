@@ -22,12 +22,13 @@ if [ ${#MISSING[@]} -ne 0 ]; then
         pipewire-bin \
         wireplumber \
         pavucontrol \
-        pipewire-audio-client-libraries
+        pipewire-audio-client-libraries \
+        pulseaudio-utils            # <--- THIS WAS MISSING
 else
     echo "✔ All required commands already present."
 fi
 
-# ---- Double‑check that everything is now available ----
+# ---- Double‑check ----
 echo
 echo "--- Verifying installation ---"
 ALL_OK=true
@@ -40,13 +41,11 @@ for cmd in "${REQUIRED_CMDS[@]}"; do
     fi
 done
 
-# ---- Check PipeWire & WirePlumber status ----
 echo
 echo "--- Service status ---"
 systemctl --user status pipewire --no-pager | head -n 3
 systemctl --user status wireplumber --no-pager | head -n 3
 
-# ---- Final summary ----
 echo
 if [ "$ALL_OK" = true ]; then
     echo "✅ All dependencies are installed and available."
@@ -60,7 +59,7 @@ if [ "$ALL_OK" = true ]; then
 else
     echo "❌ Some dependencies are still missing."
     echo "   Please try running this script again, or install manually:"
-    echo "   sudo apt install pipewire-pulse pipewire-bin wireplumber pavucontrol"
+    echo "   sudo apt install pulseaudio-utils pipewire-pulse pipewire-bin wireplumber pavucontrol"
     exit 1
 fi
 
