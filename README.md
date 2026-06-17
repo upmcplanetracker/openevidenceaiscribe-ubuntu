@@ -1,3 +1,6 @@
+<h1>This repo has been depreciated now that Openevidence has added support for Zoom and other non-brower tab telehealth platforms within their AI scribe system.</h1>
+
+
 <h1>🎧 Clinic Audio Router <span style="font-weight:400; font-size:1.2rem;">· Ubuntu / PipeWire</span></h1>
 
 <p>Route Zoom and headset audio into Google Chrome so <strong>OpenEvidence AI</strong> can transcribe meetings, while still keeping audio in your headphones.<br>
