@@ -1,26 +1,20 @@
 #!/bin/bash
 
-echo "--- Resetting Clinic Audio ---"
+PID_FILE="/tmp/clinic_loopback_pids"
 
-# Remove all manual PipeWire links
-pw-link -d -a 2>/dev/null
-echo "✔ Removed manual PipeWire links"
-
-# Remove virtual sink
-SCRIBE_ID=$(pactl list short modules | grep "module-null-sink.*Scribe_Mixer" | awk '{print $1}')
-
-if [ -n "$SCRIBE_ID" ]; then
-    pactl unload-module "$SCRIBE_ID"
-    echo "✔ Removed Scribe_Mixer"
-else
-    echo "ℹ Scribe_Mixer not present"
+if [ ! -f "$PID_FILE" ]; then
+    echo "No active clinic loopbacks found (PID file missing)."
+    exit 0
 fi
 
-# Restore headset as default (best effort)
-DEFAULT_SINK=$(pactl list short sinks | grep -i Jabra | awk '{print $2}' | head -n 1)
-DEFAULT_SOURCE=$(pactl list short sources | grep -i Jabra | awk '{print $2}' | head -n 1)
+echo "Stopping clinic audio routes..."
+while read -r pid; do
+    if kill "$pid" 2>/dev/null; then
+        echo "  Stopped PID $pid"
+    else
+        echo "  PID $pid already gone"
+    fi
+done < "$PID_FILE"
 
-[ -n "$DEFAULT_SINK" ] && pactl set-default-sink "$DEFAULT_SINK"
-[ -n "$DEFAULT_SOURCE" ] && pactl set-default-source "$DEFAULT_SOURCE"
-
-echo "--- Audio reset complete ---"
+rm -f "$PID_FILE"
+echo "✅ All clinic loopbacks stopped."
