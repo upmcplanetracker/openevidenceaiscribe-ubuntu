@@ -3,7 +3,7 @@ set -e
 
 echo "--- Checking Clinic Audio Router dependencies ---"
 
-REQUIRED_CMDS=(pw-link pactl grep awk)
+REQUIRED_CMDS=(pw-link pactl pw-loopback grep awk)
 
 MISSING=false
 for cmd in "${REQUIRED_CMDS[@]}"; do
@@ -21,6 +21,7 @@ if [ "$MISSING" = true ]; then
         pipewire \
         pipewire-pulse \
         pipewire-audio-client-libraries \
+        pipewire-bin \
         wireplumber \
         pavucontrol
 else
