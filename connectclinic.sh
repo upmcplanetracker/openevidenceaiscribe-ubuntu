@@ -2,6 +2,22 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# ---- Pre-flight check: ensure all required tools are installed ----
+REQUIRED_CMDS=(pw-link pactl pw-loopback)
+MISSING=()
+for cmd in "${REQUIRED_CMDS[@]}"; do
+    if ! command -v "$cmd" >/dev/null 2>&1; then
+        MISSING+=("$cmd")
+    fi
+done
+
+if [ ${#MISSING[@]} -ne 0 ]; then
+    echo "❌ Missing required tools: ${MISSING[*]}"
+    echo "Please run: ./install-deps.sh"
+    exit 1
+fi
+
 ENV_FILE="$SCRIPT_DIR/clinic.env"
 if [ ! -f "$ENV_FILE" ]; then
     echo "❌ clinic.env not found. Copy clinic.env.example and edit it."
